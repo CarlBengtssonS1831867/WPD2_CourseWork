@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Edit Week</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <form method="POST">
+        <div class="form-group">
+            <label>Date: </label>
+            <select class="form-control" id="Date">
+                <option value="08 Mar 2021">March 08</option>
+                <option value="09 Mar 2021">March 09</option>
+                <option value="10 Mar 2021">March 10</option>
+                <option value="11 Mar 2021">March 11</option>
+                <option value="12 Mar 2021">March 12</option>
+                <option value="13 Mar 2021">March 13</option>
+                <option value="14 Mar 2021">March 14</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Activity: </label>
+            <input type="text" class="form-control" id="Activity">
+        </div>
+        <div class="form-group">
+            <label>Unit: </label>
+            <input type="number" class="form-control" id="Number">
+            <select>
+                <option value="km">km</option>
+                <option value="times">times</option>
+                <option value="NA" selected>-</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Add Event</button>
+    </form>
+</div>
+</body>
+
+</html>

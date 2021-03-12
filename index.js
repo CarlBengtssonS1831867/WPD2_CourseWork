@@ -1,9 +1,11 @@
 const express = require('express')
+const path = require('path')
 // const nedb = require('nedb')
 const mustache = require('mustache-express')
 const router = require('./routes/routes.js')
 
 const app = express()
+global.public = path.join(__dirname, 'public')
 
 app.engine('mustache', mustache())
 app.set('view engine', 'mustache')

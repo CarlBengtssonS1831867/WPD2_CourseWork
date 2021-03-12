@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script>
+        function changeIframe(pageNumber) {
+            switch (pageNumber) {
+                case 1:
+                    document.getElementById("iframe").src = '/Plan'
+                    break
+                case 2:
+                    document.getElementById("iframe").src = '/Edit-Week'
+                    break
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button onclick="changeIframe(1)" class="btn">Week Plan</button>
+        <button onclick="changeIframe(2)" class="btn">Add New Event</button>
+
+        <iframe src="/Plan" id="iframe" title="dynamic iframe window" style="width: 900px; height: 700px;"></iframe>
+    </div>
+</body>
+
+</html>
