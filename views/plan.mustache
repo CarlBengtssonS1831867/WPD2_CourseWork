@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US">
+{{>header}}
+
+<body>
+    <table class="table">
+        <tr>
+            <th>08<br>Monday</th>
+            <th>09<br>Tuesday</th>
+            <th>10<br>Wednesday</th>
+            <th>11<br>Thursday</th>
+            <th>12<br>Friday</th>
+            <th>13<br>Saturday</th>
+            <th>14<br>Sunday</th>
+        </tr>
+        <tr>
+            <td>
+                <table class="table-hover">
+                {{#Monday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Monday}}
+                </table>
+            </td>
+            <td>
+                <table class="table-hover">
+                {{#Tuesday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Tuesday}}
+                </table>
+            </td>
+            <td>
+                <table class="table-hover">
+                {{#Wednesday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Wednesday}}
+                </table>
+            </td>
+            <td>
+                <table class="table-hover">
+                {{#Thursday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Thursday}}
+                </table>
+            </td>
+            <td>
+                <table class="table-hover">
+                {{#Friday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Friday}}
+                </table>
+            </td>
+            <td>
+                <table class="table-hover">
+                {{#Saturday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Saturday}}
+                </table>
+            </td>
+            <td>
+                <table class="table-hover">
+                {{#Sunday}}
+                    <tr>
+                        <td>{{activity}}</td>
+                        <td>{{reps}} {{unit}}</td>
+                    </tr>
+                {{/Sunday}}
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
