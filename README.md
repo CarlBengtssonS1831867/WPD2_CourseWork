@@ -1,13 +1,19 @@
 # WPD2_CourseWork
 Coursework for Web Platform Development 2.
 
+### First dashboard wireframe sketch
+<img src="public/img/WireFrameDrawn.png" width="800">
 
+### Digital version of dashboard wireframe
+Some changes were made from the first sketch. Notably the schedule is linked to the selected week and shows the month above the date.
+<img src="public/img/WireFrameDigital.png" width="800">
 
 
 Current Features:
 - [ ] Login / Register
 - [x] Week Schedule
 - [x] Adding New Workouts
+- [x] Removing Workouts
 - [x] Sending Form Data
 - [x] Updating Page With Form Data
 - [ ] Marking Finished Workouts
