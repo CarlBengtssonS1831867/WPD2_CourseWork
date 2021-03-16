@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+{{>header}}
+
+<body>
+
+    <div class="container">
+        <form method="POST">
+            <div class="form-group">
+                <label for="event">Select task to remove: </label>
+                <select class="form-control" name="event">
+                    {{#events}}
+                        <option value="{{_id}}">{{date}}, {{reps}} {{unit}} {{activity}}</option>
+                    {{/events}}
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="confirm" required>
+                <label for="confirm">Confirm Removal</label>
+            </div>
+            <button type="submit" class="btn btn-outline-danger">Remove Event</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -12,8 +12,10 @@ router.get('/Previous', controller.notImplemented)
 router.get('/Plan', controller.plan)
 router.get('/Share', controller.notImplemented)
 router.get('/TestData', controller.notImplemented)
+router.get('/Remove-Event', controller.removeEvent)
 
 router.post('/Edit-Week', controller.postEditWeek)
+router.post('/Remove-Event', controller.postRemoveEvent)
 
 router.use(function(req, res) {
     res.status(404)

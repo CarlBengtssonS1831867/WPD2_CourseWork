@@ -54,6 +54,16 @@ class ExcersisePlan {
         })
     }
 
+    removeEntry(id) {
+        this.db.remove({_id: id}, {}, function(err, numRemoved) {
+            if (err) {
+                console.log('Error: ', err)
+            } else {
+                console.log('Entires Removed: ', numRemoved)
+            }
+        })
+    }
 }
+
 
 module.exports = ExcersisePlan

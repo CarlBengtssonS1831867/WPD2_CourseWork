@@ -91,6 +91,24 @@ exports.plan = function(req, res) {
     //res.sendFile(public + '/plan.html')
 }
 
+exports.removeEvent = function(req, res) {
+    db.selectAllEntries().then((list) => {
+        res.render('removeEvent', {
+            'title': 'Remove Event',
+            'events': list,
+            /* 'day': function() {
+                var day = list.date.split(" ")
+                return String.concat(day[0], day[1], day[2])
+            } */
+        })
+    })
+}
+
+exports.postRemoveEvent = function(req, res) {
+    db.removeEntry(req.body.event)
+    res.redirect('/Plan')
+}
+
 exports.notImplemented = function(req, res) {
     res.send('<h1>Not yet implemented</h1>')
 }
