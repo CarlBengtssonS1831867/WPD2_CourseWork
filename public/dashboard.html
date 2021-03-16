@@ -14,16 +14,28 @@
                 case 2:
                     document.getElementById("iframe").src = '/Edit-Week'
                     break
+                case 3:
+                    document.getElementById("iframe").src = '/Remove-Event'
+                    break
             }
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <button onclick="changeIframe(1)" class="btn btn-outline-dark">Week Plan</button>
-        <button onclick="changeIframe(2)" class="btn btn-outline-dark">Add New Event</button>
+        <h1>Dashboard</h1>
+        <div class="contaienr">
+            <button onclick="changeIframe(1)" class="btn btn-outline-dark float-left">Week Plan</button>
+            <button onclick="changeIframe(2)" class="btn btn-outline-dark float-right">Add New Event</button>
+            <button onclick="changeIframe(3)" class="btn btn-outline-danger float-right">Remove Event</button>
 
-        <iframe src="/Plan" id="iframe" title="dynamic iframe window" style="width: 1200px; height: 700px;"></iframe>
+            <div class="clearfix"></div>
+        </div>
+        
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="/Plan" id="iframe" title="dynamic iframe window"></iframe>
+        </div>
+        
     </div>
 </body>
 
