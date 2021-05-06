@@ -20,23 +20,83 @@
             }
         }
     </script>
+    <style>
+        div {
+            border: 1px solid black;
+        }
+        .barEmpty {
+            background-color: #ddd;
+            height: 22px;
+            border: 1px solid black;
+        }
+        .barFull {
+            background-image: repeating-linear-gradient(-45deg, #000, #000 1px, #fff 2px, #fff 5px, #000 6px);
+            height: 20px;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Dashboard</h1>
-        <div class="contaienr">
-            <button onclick="changeIframe(1)" class="btn btn-outline-dark float-left">Week Plan</button>
-            <button onclick="changeIframe(2)" class="btn btn-outline-dark float-right">Add New Event</button>
-            <button onclick="changeIframe(3)" class="btn btn-outline-danger float-right">Remove Event</button>
 
-            <div class="clearfix"></div>
+<body>
+    <div class="container-fluid">
+        <div class="row mx-2">
+            <div class="col-3">
+                <h1>Dashboard</h1><br>
+                <div class="d-inline-flex w-100">
+                    <div class="m-0 p-0 w-25">
+                        <img src="" alt="logo">
+                    </div>
+                    <div class="d-flex flex-column w-75">
+                        <div class="p-1">UserName</div>
+                        <div class="p-1">
+                            UserID 
+                            <button class="btn btn-outline-dark float-right">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <h2>Goals Box</h2>
+                <div class="d-flex">
+                    <div class="container mx-1">
+                        <h3>Goal #1</h3>
+                        <div class="barEmpty">
+                            <div class="barFull" style="width: 71.42%;"></div>
+                        </div>
+                        <span class="float-right">5/7</span>
+                    </div>
+
+                    <div class="container mx-1">
+                        <h3>Goal #2</h3>
+                        <div class="barEmpty">
+                            <div class="barFull" style="width: 20%;"></div>
+                        </div>
+                        <span class="float-right">4/20</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="/Plan" id="iframe" title="dynamic iframe window"></iframe>
+
+        <div class="row mx-2">
+            <div class="col-3 py-2">
+                <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(1)">Edit Week Plan</button>
+                <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(2)">Set Week Goals</button>
+                <div class="form-group d-inline-flex w-100 my-2">
+                    <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(3)">Jump to Week:</button>
+                    <input type="number" placeholder="Week Number">
+                </div>
+            </div>
+            <div class="col-9 p-0">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="/Plan" id="iframe" title="dynamic iframe window"></iframe>
+                </div>
+            </div>
         </div>
-        
+
+        <div class="row mx-2">
+            <div class="w-100 pr-5">
+                <button class="btn btn-outline-dark float-right">Share Week Plan</button>
+            </div>
+        </div>
     </div>
 </body>
-
 </html>
