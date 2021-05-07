@@ -42,5 +42,5 @@ exports.init = function(app) {
 }
 
 exports.authorize = function(redirect) {
-    return passport.authenticate('local', {failureRedirect: redirect})
+    return passport.authenticate('local', {successReturnToOrRedirect: '/Dashboard', failureRedirect: redirect, failureFlash: 'Username or Password was not found, please try again.'})
 }

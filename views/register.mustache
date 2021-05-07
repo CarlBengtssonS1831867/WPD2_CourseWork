@@ -6,8 +6,8 @@
     <div class="d-flex align-items-centre w-100">
         <div class="container py-5 mt-5">
             <h1>Weekly Fitness Planner</h1>
-            <form method="POST" role="login">
-                <span class="text-danger h4 font-italic pt-5">&nbsp;{{login-error}}</span>
+            <form method="POST" role="register">
+                <span class="text-danger h4 font-italic pt-5">&nbsp;{{register-error}}</span>
                 <div class="form-group">
                     <label for="username" class="h4 text-muted">Username:</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
@@ -18,8 +18,8 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" minlength="8" required>
                 </div>
 
-                <input type="submit" value="Login" class="btn btn-dark">
-                <button class="btn btn-outline-dark float-right" onclick="window.location.href = '/Register'">Register</button>
+                <input type="submit" value="Register" class="btn btn-dark">
+                <button class="btn btn-outline-dark float-right" onclick="window.location.href = '/'">Back</button>
             </form>
         </div>
     </div>

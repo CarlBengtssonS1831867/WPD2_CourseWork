@@ -1,23 +1,27 @@
 const databaseDAO = require('../models/dashboardModel')
 const db = new databaseDAO('database.db')
+const userModel = require('../models/userModel')
 
 exports.login = function(req, res) {
     res.render('login', {
-        'title': 'Login'
+        title: 'Login',
+        'login-error': req.flash('error')
+    })
+}
+
+exports.register = function(req, res) {
+    res.render('register', {
+        title: 'Register'
     })
 }
 
 exports.dashboard = function(req, res) {
+    console.log(req.user)
     res.sendFile(public + '/dashboard.html')
 }
 
 exports.editWeek = function(req, res) {
     res.sendFile(public + '/edit-week.html')
-}
-
-exports.postEditWeek = function(req, res) {
-    db.insertNewActivity(req.body.Date, req.body.Activity, req.body.Number, req.body.Unit)
-    res.redirect('/Plan')
 }
 
 exports.plan = function(req, res) {
@@ -28,7 +32,6 @@ exports.plan = function(req, res) {
         
         list.forEach(element => {
             var date = element.date.toISOString()
-            console.log(date)
             switch(date) {
                 case '2021-03-08T00:00:00.000Z':
                     monday.push(element)
@@ -53,9 +56,6 @@ exports.plan = function(req, res) {
                     break
             }
         })
-
-        console.log('monday', monday)
-        console.log('friday', friday)
 
         res.render('plan', {
             'title': 'Plan',
@@ -104,11 +104,47 @@ exports.removeEvent = function(req, res) {
     })
 }
 
+//Post Methods
+
+exports.postLogin = function(req, res) {
+    res.redirect('/Dashboard')
+}
+
+exports.postRegister = function(req, res) {
+    if (!req.body.username || !req.body.password || req.body.password.length < 8) {
+        res.render('register', {
+            title: 'Register',
+            'register-error': 'Invalid Username or Password, please try again.'
+        })
+        return
+    }
+
+    userModel.findUser(req.body.username, (err, user) => {
+        if(user) {
+            console.log('user already exists')
+            res.render('register', {
+                title: 'Register',
+                'register-error': 'Username already exists, please choose another username.'
+            })
+            return
+        }
+        console.log('user OK to register')
+        userModel.newUser(req.body.username, req.body.password)
+        res.redirect('/')
+    })
+}
+
+exports.postEditWeek = function(req, res) {
+    db.insertNewActivity(req.body.Date, req.body.Activity, req.body.Number, req.body.Unit)
+    res.redirect('/Plan')
+}
+
 exports.postRemoveEvent = function(req, res) {
     db.removeEntry(req.body.event)
     res.redirect('/Plan')
 }
 
+//Not Implemented Method
 exports.notImplemented = function(req, res) {
     res.send('<h1>Not yet implemented</h1>')
 }

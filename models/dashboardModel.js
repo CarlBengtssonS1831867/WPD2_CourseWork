@@ -35,7 +35,6 @@ class ExcersisePlan {
                     reject(err)
                 } else {
                     resolve(entries)
-                    console.log('entries: ', entries)
                 }
             })
         })
@@ -48,7 +47,6 @@ class ExcersisePlan {
                     reject(err)
                 } else {
                     resolve(entries)
-                    console.log('entries: ', entries)
                 }
             })
         })
