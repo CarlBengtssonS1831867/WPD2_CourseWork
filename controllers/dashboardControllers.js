@@ -33,8 +33,48 @@ exports.dashboard = function(req, res) {
     })
 }
 
+exports.selectEditWeek = function(req, res) {
+    db.selectAllEntries(req.user._id).then(list => {
+        res.render('selectEditWeek', {
+            title: 'Select Week to Edit',
+            WeekPlans: list,
+            tasksNum: () => {return this.tasks.length}
+        })
+    })
+}
+
 exports.editWeek = function(req, res) {
-    res.sendFile(public + '/edit-week.html')
+    var week
+
+    if (req.query.WeekNumber) {
+        week = req.query.WeekNumber
+    } else if (req.query.WeekPlan) {
+        week = req.query.WeekPlan
+    } else {
+        res.redirect('/Plan')
+        return
+    }
+
+    db.selectWeekPlan(week, req.user._id).then(entry => {
+        res.render('editWeek', {
+            title: 'Edit Week',
+            week: week,
+            taskLength: entry.tasks.length,
+            tasks: entry.tasks,
+            date: () => {
+                if (this.weekday == 8) {return 'Week Goal'}
+                return new Date(2021, 0, this.day).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})
+            }
+        })
+    }).catch(() => {
+        db.newWeekPlan(req.user._id, week).then(entry => {
+            res.render('editWeek', {
+                title: 'Edit Week',
+                week: week,
+                taskLength: entry.tasks.length
+            })
+        })
+    })
 }
 
 exports.planNew = function(req, res) {
@@ -197,7 +237,7 @@ exports.plan = function(req, res) {
 }
 
 exports.removeEvent = function(req, res) {
-    db.selectAllEntries().then((list) => {
+    db.selectAllEntries(req.user._id).then((list) => {
         res.render('removeEvent', {
             'title': 'Remove Event',
             'events': list,
@@ -207,6 +247,11 @@ exports.removeEvent = function(req, res) {
             } */
         })
     })
+}
+
+exports.completeEvent = function(req, res) {
+    db.completeEntry(req.query.week, req.user._id, req.query.taskID)
+    res.redirect('/Plan')
 }
 
 //Post Methods
@@ -239,13 +284,33 @@ exports.postRegister = function(req, res) {
     })
 }
 
-exports.postEditWeek = function(req, res) {
-    db.insertNewActivity(req.body.Date, req.body.Activity, req.body.Number, req.body.Unit)
+exports.postNewEvent = function(req, res) {
+    res.render('/newEvent', {
+        title: 'New Event',
+        taskLength: req.body.taskLength,
+        week: req.body.week,
+        mon: ()=> {new Date(2021, 0, req.body.week*7-3).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+        tue: ()=> {new Date(2021, 0, req.body.week*7-2).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+        wed: ()=> {new Date(2021, 0, req.body.week*7-1).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+        thu: ()=> {new Date(2021, 0, req.body.week*7).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+        fri: ()=> {new Date(2021, 0, req.body.week*7+1).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+        sat: ()=> {new Date(2021, 0, req.body.week*7+2).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+        sun: ()=> {new Date(2021, 0, req.body.week*7+3).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})},
+    })
+}
+
+exports.postEditEvent = function(req, res) {
+    db.editEntry(req.body.week, req.user._id, req.body.taskID, req.body.activity, req.body.number, req.body.unit)
     res.redirect('/Plan')
 }
 
-exports.postRemoveEvent = function(req, res) {
-    db.removeEntry(req.body.event)
+exports.postDeleteEvent = function (req, res) {
+    db.removeEntry(req.body.week, req.user._id, req.body.Task)
+    res.redirect('/Plan')
+}
+
+exports.postAddNewEvent = function(req, res) {
+    db.insertNewActivity(req.body.week, req.user._id, req.body.week*7-4+req.body.Date, req.body.Activity, req.body.Number, req.body.Unit, req.body.Date, req.body.taskLength)
     res.redirect('/Plan')
 }
 

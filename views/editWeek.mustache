@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+{{>head}}
+
+<body>
+<div class="container">
+    <form method="POST">
+        <input type="hidden" id="weekNum" value="{{week}}">
+        <input type="hidden" id="taskLength" value="{{taskLength}}">
+        <div class="form-group">
+            <label>Event:</label>
+            <select class="form-control" name="Task" id="Task">
+                <option hidden disabled selected>Select task to edit</option>
+                {{#tasks}}
+                <option value="{{id}}">{{date}} - {{activity}} {{number}} {{unit}}</option>
+                {{/tasks}}
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block btn-success" id="newEvent" formaction="/New-Event">New Event</button>
+            <button type="submit" class="btn btn-block btn-dark" id="editEvent" formaction="/Edit-Event">Edit Event</button>
+            <input type="checkbox" class="float-right" id="deleteVerify" disabled>
+            <button type="submit" class="btn btn-block btn-danger float-right" id="deleteEvent" formaction="/Delete-Event" disabled>Delete Event</button>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById('Task').addEventListener('change', () => {
+        document.getElementById('editEvent').disabled = false
+        document.getElementById('deleteVerify').disabled = false
+    })
+    document.getElementById('deleteVerify').addEventListener('change', () => {
+        if (this.checked) {
+            document.getElementById('deleteEvent').disabled = false
+        } else {
+            document.getElementById('deleteEvent').disabled = true
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+{{>head}}
+
+<body>
+<div class="container">
+    <form method="POST" action="/Add-New-Event">
+        <input type="hidden" id="weekNum" value="{{week}}">
+        <input type="hidden" id="taskLength" value="{{taskLength}}">
+        <div class="form-group">
+            <label>Date:</label>
+            <select class="form-control" name="Date">
+                <option hidden disabled selected>Select date of event.</option>
+                <option value="1">{{mon}}</option>
+                <option value="2">{{tue}}</option>
+                <option value="3">{{wed}}</option>
+                <option value="4">{{thu}}</option>
+                <option value="5">{{fri}}</option>
+                <option value="6">{{sat}}</option>
+                <option value="7">{{sun}}</option>
+                <option value="8">Week Goal</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Activity">Activity: </label>
+            <input type="text" class="form-control" name="Activity">
+        </div>
+        <div class="form-group">
+            <label for="Number">Number: </label>
+            <input type="number" class="form-control" name="Number" placeholder="Number">
+            <label for="Unit">Unit:</label>
+            <input type="text" class="form-control" name="Unit">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block btn-dark float-right">Add Event</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
