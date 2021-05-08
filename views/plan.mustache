@@ -179,6 +179,16 @@
             </td>
         </tr>
     </table> -->
+    <div>
+        <button class="btn btn-outline-dark float-right mr-5" id="shareBtn">Share Week Plan</button>
+        <textarea class="float-right mr-5" id="shareText" rows="1" cols="30" hidden>{{share}}</textarea>
+    </div>
+    <script>
+        document.getElementById('shareBtn').addEventListener('click', ()=> {
+            document.getElementById('shareBtn').hidden = true
+            document.getElementById('shareText').hidden = false
+        })
+    </script>
 </body>
 
 </html>

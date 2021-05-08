@@ -185,7 +185,8 @@ function renderPlan(req, res, entry, weekNum) {
             } else {
                 return ''
             }
-        }
+        },
+        share: ()=> {if (entry._id) {return `/Plan?id=${entry._id}`} else {return ''}}
     })
 }
 
