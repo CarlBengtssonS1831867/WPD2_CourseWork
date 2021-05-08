@@ -40,13 +40,25 @@ class ExcersisePlan {
         })
     }
 
-    selectEntriesOnDate(date) {
+    selectWeekPlan(weekNumber, userID) {
         return new Promise((resolve, reject) => {
-            this.db.find({date: date}, function(err, entries) {
+            this.db.findOne({week: weekNumber, userID: userID}, function(err, entry) {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve(entries)
+                    resolve(entry)
+                }
+            })
+        })
+    }
+
+    selectWeekPlanByID(weekID) {
+        return new Promise((resolve, reject) => {
+            this.db.findOne({_id: weekID}, function(err, entry) {
+                if (err || !entry) {
+                    reject(err)
+                } else {
+                    resolve(entry)
                 }
             })
         })

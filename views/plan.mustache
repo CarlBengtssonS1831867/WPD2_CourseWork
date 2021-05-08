@@ -3,7 +3,100 @@
 {{>header}}
 
 <body>
-    <table class="table">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="container text-right font-weight-bold h1"><a class="text-dark" href="/plan?week={{prevWeek}}">&#10094;</a></div>
+            <div class="container text-center">
+                <h1>Week {{weekNumber}}</h1>
+                {{firstDay}} - {{lastDay}}<br>
+                {{year}}
+            </div>
+            <div class="container text-left font-weight-bold h1"><a class="text-dark" href="/plan?week={{nextWeek}}">&#10095;</a></div>
+        </div>
+    </div>
+    <hr>
+    <div class="container-fluid d-flex flex-wrap justify-content-around">
+        {{#content}}
+        <ul>
+            <lh class="h3">{{day}}</lh>
+            {{#tasks}}
+            <li>{{activity}} {{number}} {{unit}}</li>
+            {{/tasks}}
+        </ul>
+        {{/content}}
+        {{^content}}
+        <span class="h2">No activites this week.</span>
+        {{/content}}
+
+        <!-- <ul>
+            <lh class="h3">Week Tasks</lh>
+            <li>Meal prep</li>
+            <li>Wash bedsheets</li>
+            <li>Call parents</li>
+        </ul>
+        <ul>
+            <lh class="h3">Monday</lh>
+            <li>Run 4km</li>
+            <li>12 Situps</li>
+        </ul>
+        <ul>
+            <lh class="h3">Wednesday</lh>
+            <li>30 Pushups</li>
+        </ul>
+        <ul>
+            <lh class="h3">Sunday</lh>
+            <li>Run 4km</li>
+            <li>15 Squats</li>
+        </ul> -->
+        
+
+        <!-- <div class="container w-25">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Week Tasks:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Meal prep</td></tr>
+                    <tr><td>Wash bedsheets</td></tr>
+                    <tr><td>Call parents</td></tr>
+                </tbody>
+            </table>
+            <span class="h2">Week Tasks:</span>
+            <ul>
+                <li>Meal prep</li>
+                <li>Wash bedsheets</li>
+                <li>Call parents</li>
+            </ul>
+        </div>
+        <div class="container w-75">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Monday:</th>
+                        <th>Wednesday:</th>
+                        <th>Sunday:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Run 4km</td>
+                        <td>30 Pushups</td>
+                        <td>Run 4km</td>
+                    </tr>
+                    <tr>
+                        <td>12 Situps</td>
+                        <td></td>
+                        <td>15 Squats</td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="h2">Day Tasks:</span>
+            
+        </div> -->
+    </div>
+    <!-- <table class="table">
         <tr>
             <th>Mar<br>08<br>Monday</th>
             <th>Mar<br>09<br>Tuesday</th>
@@ -85,7 +178,7 @@
                 </table>
             </td>
         </tr>
-    </table>
+    </table> -->
 </body>
 
 </html>

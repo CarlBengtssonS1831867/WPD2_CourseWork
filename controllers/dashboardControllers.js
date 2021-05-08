@@ -1,6 +1,9 @@
 const databaseDAO = require('../models/dashboardModel')
 const db = new databaseDAO('database.db')
 const userModel = require('../models/userModel')
+const weeknumber = require('weeknumber')
+const { AvatarGenerator } = require('random-avatar-generator')
+const generator = new AvatarGenerator()
 
 exports.login = function(req, res) {
     res.render('login', {
@@ -15,13 +18,115 @@ exports.register = function(req, res) {
     })
 }
 
+exports.logout = function(req, res) {
+    req.logout()
+    res.redirect('/')
+}
+
 exports.dashboard = function(req, res) {
     console.log(req.user)
-    res.sendFile(public + '/dashboard.html')
+    res.render('dashboard', {
+        title: 'Dashboard',
+        username: req.user.username,
+        id: req.user._id,
+        avatar: generator.generateRandomAvatar(req.user._id)
+    })
 }
 
 exports.editWeek = function(req, res) {
     res.sendFile(public + '/edit-week.html')
+}
+
+exports.planNew = function(req, res) {
+    if (req.query.id) {
+        db.selectWeekPlanByID(req.query.id).then(entry => {
+            let week = weeknumber.weekNumberYear(new Date(2021, 0, entry.week*7))
+            renderPlan(req, res, entry, week)
+        }).catch(() => {
+            res.send(`<h1>Plan with ID: '${req.query.id}' was not found.</h1>`)
+        })
+    } else if (req.query.week) {
+        db.selectWeekPlan(req.query.week, req.user._id).then(entry => {
+            let week = weeknumber.weekNumberYear(new Date(2021, 0, entry.week*7))
+            renderPlan(req, res, entry, week)
+        }).catch(() => {
+            let week = weeknumber.weekNumberYear(new Date(2021, 0, req.query.week*7))
+            renderPlan(req, res, null, week)
+        })
+    } else {
+        let week = weeknumber.weekNumberYear(new Date())
+        db.selectWeekPlan(week.week, req.user._id).then(entry => {
+            renderPlan(req, res, entry, week)
+        })
+    }
+}
+
+function renderPlan(req, res, entry, weekNum) {
+    var week = weeknumber.weekNumberYear(new Date(weekNum.year, 0, weekNum.week*7))
+    var day = weeknumber.dayOfYear(new Date(week.year, 0, week.week*7))
+    var firstDay = new Date(week.year, 0, day-week.day+1).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})
+    var lastDay = new Date(week.year, 0, day-week.day+7).toLocaleDateString(undefined, {month: 'long', day: '2-digit'})
+
+    var mon = {day: 'Monday:', tasks: []}
+    var tue = {day: 'Tuesday:', tasks: []}
+    var wed = {day: 'Wednesday:', tasks: []}
+    var thu = {day: 'Thursday:', tasks: []}
+    var fri = {day: 'Friday:', tasks: []}
+    var sat = {day: 'Saturday:', tasks: []}
+    var sun = {day: 'Sunday:', tasks: []}
+    var weekTask = {day: 'Week tasks:', tasks: []}
+    var content = []
+
+    if (entry) {
+        entry.tasks.forEach(element => {
+            switch (element.weekDay) {
+                case 1:
+                    mon.tasks.push(element)
+                    break
+                case 2:
+                    tue.tasks.push(element)
+                    break
+                case 3:
+                    wed.tasks.push(element)
+                    break
+                case 4:
+                    thu.tasks.push(element)
+                    break
+                case 5:
+                    fri.tasks.push(element)
+                    break
+                case 6:
+                    sat.tasks.push(element)
+                    break
+                case 7:
+                    sun.tasks.push(element)
+                    break
+                case 8:
+                    weekTask.tasks.push(element)
+                    break
+            }
+        })
+    }
+
+    if (mon.tasks.length > 0) {content.push(mon)}
+    if (tue.tasks.length > 0) {content.push(tue)}
+    if (wed.tasks.length > 0) {content.push(wed)}
+    if (thu.tasks.length > 0) {content.push(thu)}
+    if (fri.tasks.length > 0) {content.push(fri)}
+    if (sat.tasks.length > 0) {content.push(sat)}
+    if (sun.tasks.length > 0) {content.push(sun)}
+    if (weekTask.tasks.length > 0) {content.push(weekTask)}
+
+    res.render('plan', {
+        title: 'Plan',
+        weekNumber: week.week,
+        prevWeek: () => {return week.week-1},
+        nextWeek: () => {return week.week+1},
+        firstDay: firstDay,
+        lastDay: lastDay,
+        year: week.year,
+        content: content
+    })
 }
 
 exports.plan = function(req, res) {
