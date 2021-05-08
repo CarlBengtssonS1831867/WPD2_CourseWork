@@ -165,7 +165,14 @@ function renderPlan(req, res, entry, weekNum) {
         firstDay: firstDay,
         lastDay: lastDay,
         year: week.year,
-        content: content
+        content: content,
+        check: ()=> {
+            if (this.completed == 1) {
+                return '<i class="fas fa-check" style="color: green;"></i>'
+            } else {
+                return ''
+            }
+        }
     })
 }
 
@@ -251,7 +258,7 @@ exports.removeEvent = function(req, res) {
 
 exports.completeEvent = function(req, res) {
     db.completeEntry(req.query.week, req.user._id, req.query.taskID)
-    res.redirect('/Plan')
+    res.redirect(`/Plan?week=${req.query.week}`)
 }
 
 //Post Methods
