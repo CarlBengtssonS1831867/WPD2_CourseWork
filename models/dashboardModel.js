@@ -34,15 +34,15 @@ class ExcersisePlan {
         var entry = {
             day: day,
             activity: activity,
-            reps: reps,
+            reps: parseInt(reps),
             unit: unit,
             completed: 0,
             weekday: weekday,
-            id: id,
+            id: parseInt(id),
             show: 1
         }
-
-        this.db.update({week: week, userID: userID}, {$push: {tasks: entry}},  {}, function(err, doc) {
+        
+        this.db.update({week: parseInt(week), userID: userID}, {$push: {tasks: entry}},  {}, function(err, doc) {
             if (err) {
                 console.log('Error: ', err)
             } else {
@@ -97,12 +97,13 @@ class ExcersisePlan {
                 }
             })
         }).then(doc => {
-            doc.tasks.forEach(element => {
+            var entry = doc
+            doc.tasks.forEach((element, index) => {
                 if (element.id == taskID) {
-                    element.show = 0
+                    entry.tasks[index].show = 0
                 }
             })
-            this.db.update({week: week, userID: userID}, doc, {}, (err, numRep) => {
+            this.db.update({week: week, userID: userID}, entry, {}, (err, numRep) => {
                 if (err) {
                     console.log(err)
                 } else {
@@ -122,18 +123,17 @@ class ExcersisePlan {
                 }
             })
         }).then(doc => {
-            doc.tasks.forEach(element => {
+            var entry = doc
+            entry.tasks.forEach((element, index) => {
                 if (element.id == taskID) {
-                    element.activity = activity
-                    element.number = number
-                    element.unit = unit
+                    entry.tasks[index].activity = activity
+                    entry.tasks[index].reps = number
+                    entry.tasks[index].unit = unit
                 }
             })
-            this.db.update({week: week, userID: userID}, doc, {}, (err, numRep) => {
+            this.db.update({week: week, userID: userID}, entry, {}, (err, numRep) => {
                 if (err) {
                     console.log(err)
-                } else {
-                    console.log(numRep)
                 }
             })
         })
@@ -151,7 +151,11 @@ class ExcersisePlan {
         }).then(doc => {
             doc.tasks.forEach(element => {
                 if (element.id == taskID) {
-                    element.completed = 1
+                    if (element.completed == 0) {
+                        element.completed = 1
+                    } else {
+                        element.completed = 0
+                    }
                 }
             })
             this.db.update({week: week, userID: userID}, doc, {}, (err, numRep) => {

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-US">
-{{>head}}
+{{>header}}
 
 <body>
 <div class="container">
     <form method="POST" action="/Add-New-Event">
-        <input type="hidden" id="weekNum" value="{{week}}">
-        <input type="hidden" id="taskLength" value="{{taskLength}}">
+        <input type="hidden" id="week" name="week" value="{{week}}">
+        <input type="hidden" id="taskLength" name="taskLength" value="{{taskLength}}">
         <div class="form-group">
             <label>Date:</label>
-            <select class="form-control" name="Date">
+            <select class="form-control" id="Date" name="Date">
                 <option hidden disabled selected>Select date of event.</option>
-                <option value="1">{{mon}}</option>
-                <option value="2">{{tue}}</option>
-                <option value="3">{{wed}}</option>
-                <option value="4">{{thu}}</option>
-                <option value="5">{{fri}}</option>
-                <option value="6">{{sat}}</option>
-                <option value="7">{{sun}}</option>
+                <option value="1">Monday,&emsp;&emsp;&emsp;&emsp;&nbsp;{{mon}}</option>
+                <option value="2">Tuesday,&emsp;&emsp;&emsp;&emsp;&nbsp;{{tue}}</option>
+                <option value="3">Wednesday,&emsp;&emsp;&emsp;{{wed}}</option>
+                <option value="4">Thursday,&emsp;&emsp;&emsp;&emsp;{{thu}}</option>
+                <option value="5">Friday,&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;{{fri}}</option>
+                <option value="6">Saturday,&emsp;&emsp;&emsp;&emsp;{{sat}}</option>
+                <option value="7">Sunday,&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;{{sun}}</option>
                 <option value="8">Week Goal</option>
             </select>
         </div>

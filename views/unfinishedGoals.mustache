@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en-US">
+{{>header}}
+
+<body>
+<div class="container">
+    <ul>
+        <lh class="h3">Unfinished tasks</lh>
+        {{#tasks}}
+        <li><a href="/Complete-Event?week={{weekNumber}}&taskID={{id}}&unfinished=1">{{&check}}{{date}} - {{activity}} {{reps}} {{unit}}</a></li>
+        {{/tasks}}
+    </ul>
+</div>
+</body>
+</html>

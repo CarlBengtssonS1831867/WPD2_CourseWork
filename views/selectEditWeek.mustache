@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US">
-{{>head}}
+{{>header}}
 
 <body>
 <div class="container">
@@ -10,7 +10,7 @@
             <select class="form-control" name="WeekPlan" id="WeekPlan">
                 <option hidden disabled selected>Select Week</option>
                 {{#WeekPlans}}
-                <option value="{{weekNumber}}">Week {{weekNumber}} - {{tasksNum}} Tasks</option>
+                <option value="{{week}}">Week {{week}} - {{tasksNum}} Tasks</option>
                 {{/WeekPlans}}
             </select>
         </div>

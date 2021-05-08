@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en-US">
-{{>head}}
+{{>header}}
 
 <body>
 <div class="container">
     <form method="POST">
-        <input type="hidden" id="weekNum" value="{{week}}">
-        <input type="hidden" id="taskLength" value="{{taskLength}}">
+        <input type="hidden" id="week" name="week" value="{{week}}">
+        <input type="hidden" id="taskLength" name="taskLength" value="{{taskLength}}">
         <div class="form-group">
-            <label>Event:</label>
-            <select class="form-control" name="Task" id="Task">
+            <label for="task">Event:</label>
+            <select class="form-control" name="task" id="task">
                 <option hidden disabled selected>Select task to edit</option>
                 {{#tasks}}
-                <option value="{{id}}">{{date}} - {{activity}} {{number}} {{unit}}</option>
+                <option value="{{id}}">{{date}} - {{activity}} {{reps}} {{unit}}</option>
                 {{/tasks}}
             </select>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-block btn-success" id="newEvent" formaction="/New-Event">New Event</button>
-            <button type="submit" class="btn btn-block btn-dark" id="editEvent" formaction="/Edit-Event">Edit Event</button>
-            <input type="checkbox" class="float-right" id="deleteVerify" disabled>
-            <button type="submit" class="btn btn-block btn-danger float-right" id="deleteEvent" formaction="/Delete-Event" disabled>Delete Event</button>
+            <button type="submit" class="btn btn-success" id="newEvent" formaction="/New-Event">New Event</button>
+            <button type="submit" class="btn btn-dark" id="editEvent" formaction="/Edit-Event" disabled>Edit Event</button>
+            <div class="form-check float-right">
+                <input type="checkbox" class="form-check-input" id="deleteVerify" disabled>
+                <button type="submit" class="btn btn-danger" id="deleteEvent" formaction="/Delete-Event" disabled>Delete Event</button>
+            </div>
         </div>
     </form>
 </div>
 <script>
-    document.getElementById('Task').addEventListener('change', () => {
+    document.getElementById('task').addEventListener('change', () => {
         document.getElementById('editEvent').disabled = false
         document.getElementById('deleteVerify').disabled = false
     })
     document.getElementById('deleteVerify').addEventListener('change', () => {
-        if (this.checked) {
+        if (document.getElementById('deleteVerify').checked) {
             document.getElementById('deleteEvent').disabled = false
         } else {
             document.getElementById('deleteEvent').disabled = true

@@ -60,7 +60,7 @@
             <div class="col-3 py-2">
                 <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(1)">Show Current Week Plan</button>
                 <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(2)">Edit Week Plan</button>
-                <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(3)">Set Week Goals</button>
+                <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(3)">Unfinished Goals</button>
                 <div class="form-group d-inline-flex w-100 my-2">
                     <button class="btn btn-outline-dark btn-lg btn-block" onclick="changeIframe(4)">Jump to Week:</button>
                     <input type="number" placeholder="Week Number" id="week" min="1">
@@ -87,10 +87,10 @@
                     document.getElementById("iframe").src = '/Plan'
                     break
                 case 2:
-                    document.getElementById("iframe").src = '/Edit-Week'
+                    document.getElementById("iframe").src = '/Select-Edit-Week'
                     break
                 case 3:
-                    alert('Function has not been implomented.')
+                    document.getElementById("iframe").src = '/Unfinished-Goals'
                     break
                 case 4:
                     let week = document.getElementById("week").value

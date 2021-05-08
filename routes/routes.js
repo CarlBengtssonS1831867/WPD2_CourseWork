@@ -14,11 +14,13 @@ router.get('/Edit-Week', ensureLoggedIn('/'), controller.editWeek)
 router.get('/Plan', controller.planNew)
 router.get('/Share', controller.notImplemented)
 router.get('/Complete-Event', ensureLoggedIn('/'), controller.completeEvent)
+router.get('/Unfinished-Goals', ensureLoggedIn('/'), controller.unfinishedGoals)
 
 router.post('/', auth.authorize('/'), controller.postLogin)
 router.post('/Register', controller.postRegister)
 router.post('/New-Event', controller.postNewEvent)
 router.post('/Edit-Event', controller.postEditEvent)
+router.post('/Update-Event', controller.postUpdateEvent)
 router.post('/Delete-Event', controller.postDeleteEvent)
 router.post('/Add-New-Event', controller.postAddNewEvent)
 
