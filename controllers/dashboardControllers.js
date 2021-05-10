@@ -186,7 +186,7 @@ function renderPlan(req, res, entry, weekNum) {
                 return ''
             }
         },
-        share: ()=> {if (entry._id) {return `/Plan?id=${entry._id}`} else {return ''}}
+        share: ()=> {if (entry) {return `/Plan?id=${entry._id}`} else {return ''}}
     })
 }
 
