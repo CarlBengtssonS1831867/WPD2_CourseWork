@@ -1,6 +1,12 @@
 # WPD2_CourseWork
 Coursework for Web Platform Development 2.
 
+#### Commands to run application
+```
+npm install
+node index
+```
+
 ### First dashboard wireframe sketch
 <img src="public/imgs/WireFrameDrawn.jpg" width="800">
 
@@ -10,14 +16,12 @@ Some changes were made from the first sketch. Notably the schedule is linked to 
 
 
 Current Features:
-- [ ] Login / Register
+- [x] Login / Register
 - [x] Week Schedule
 - [x] Adding New Workouts
 - [x] Removing Workouts
 - [x] Sending Form Data
 - [x] Updating Page With Form Data
-- [ ] Marking Finished Workouts
-- [ ] Monthly Goals
-- [ ] Monthly Goal Progress Bars
-- [ ] Week Selection
-- [ ] Share Week Plan
+- [x] Marking Finished Workouts
+- [x] Week Selection
+- [x] Share Week Plan
